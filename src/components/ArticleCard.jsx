@@ -9,9 +9,8 @@ const ArticleCard = ({ article, index }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ scale: 1.03 }}
-      className="bg-white rounded-2xl shadow-md hover:shadow-xl transition p-4 flex flex-col"
+      className="bg-white rounded-2xl mx-auto shadow-md hover:shadow-xl transition p-4 flex flex-col"
     >
-      {/* Gambar */}
       <div className="relative w-full h-48 mb-4 overflow-hidden rounded-lg">
         <motion.img
           src={article.image}
@@ -22,7 +21,8 @@ const ArticleCard = ({ article, index }) => {
         />
       </div>
 
-      <a
+      <div className="p-3">
+        <a
         href={article.link}
         target="_blank"
         rel="noopener noreferrer"
@@ -50,6 +50,7 @@ const ArticleCard = ({ article, index }) => {
         >
           Baca Selengkapnya
         </motion.a>
+      </div>
       </div>
     </motion.div>
   );

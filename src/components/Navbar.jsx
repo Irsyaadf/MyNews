@@ -9,6 +9,12 @@ const Navbar = ({value, onChange}) => {
           MyNews
         </Link>
 
+        <nav className="text-black flex space-x-2 font-semibold">
+          <Link to={"/"} className="hover:text-blue-700">Home</Link>
+          <Link to={"/about"} className="hover:text-blue-700">About</Link>
+          <Link to={"/article"} className="hover:text-blue-700">Article</Link>
+        </nav>
+
         <input
           type="text"
           value={value}
