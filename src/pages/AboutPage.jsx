@@ -10,6 +10,7 @@ const AboutPage = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
           <h1 className="text-3xl font-bold text-gray-800 text-center mb-6">Tentang Kami</h1>
+          <img src='https://plus.unsplash.com/premium_photo-1707080369554-359143c6aa0b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bmV3c3xlbnwwfHwwfHx8MA%3D%3D' className='w-full object-cover h-auto'/>
           <p className="text-lg text-gray-600 text-center mb-12">
             MyNews menyajikan informasi aktual dan terverifikasi untuk masyarakat Indonesia.
           </p>

@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Clock, User, ArrowRight } from "lucide-react";
-import { categories, featuredArticle, latestArticles } from "../services/utils";
+import { categories, featuredArticle, } from "../services/utils";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { getArticles } from "../services/api";
+
 
 const HomePage = () => {
-
+    const [articles, setArticles] = useState([]);
+    useEffect(() => {
+    const fetchData = async () => {
+      const data = await getArticles();
+      setArticles(data);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -38,9 +47,7 @@ const HomePage = () => {
               <span>•</span>
               <span>{featuredArticle.readTime}</span>
             </div>
-            <Link
-              className="inline-flex items-center px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 group"
-            >
+            <Link className="inline-flex items-center px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 group">
               Baca Selengkapnya
               <ArrowRight
                 size={18}
@@ -54,22 +61,25 @@ const HomePage = () => {
       {/* Main Content */}
       <main className="container mx-auto px-4 flex-1 mb-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Articles Section */}
           <div className="lg:col-span-2">
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-bold text-gray-800">
                 Berita Terbaru
               </h2>
-              <button className="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+              <Link
+                to="/articles"
+                className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
+              >
                 Lihat Semua
                 <ArrowRight size={16} className="ml-1" />
-              </button>
+              </Link>
             </div>
 
+            {/* 🔥 Hanya tampilkan 4 artikel */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {latestArticles.map((article) => (
+              {articles.slice(1, 5).map((article, index) => (
                 <div
-                  key={article.id}
+                  key={index}
                   className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
                 >
                   <div className="relative h-48 overflow-hidden">
@@ -85,22 +95,22 @@ const HomePage = () => {
                     </h3>
                     <div className="flex flex-wrap items-center text-sm text-gray-500 gap-2 mb-3">
                       <Clock size={18} />
-                      {article.date}
+                      {article.pubDate}
                     </div>
 
                     <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                      {article.excerpt}
+                      {article.headline}
                     </p>
 
                     <motion.a
-          href={article.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition"
-          whileTap={{ scale: 0.95 }}
-        >
-          Baca Selengkapnya
-        </motion.a>
+                      href={article.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition"
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Baca Selengkapnya
+                    </motion.a>
                   </div>
                 </div>
               ))}
@@ -109,7 +119,6 @@ const HomePage = () => {
 
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            {/* Categories Section */}
             <div className="bg-white rounded-xl shadow-md p-6 mb-8">
               <h3 className="text-xl font-bold text-gray-800 mb-4">
                 Kategori Berita

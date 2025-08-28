@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = ({value, onChange}) => {
+const Navbar = () => {
   return (
     <header className="bg-white text-white shadow-md sticky top-0 z-50 px-16">
       <div className="py-6 flex justify-between items-center">
@@ -9,19 +9,13 @@ const Navbar = ({value, onChange}) => {
           MyNews
         </Link>
 
-        <nav className="text-black flex space-x-2 font-semibold">
+        <nav className="text-black flex space-x-8 font-semibold">
           <Link to={"/"} className="hover:text-blue-700">Home</Link>
           <Link to={"/about"} className="hover:text-blue-700">About</Link>
           <Link to={"/article"} className="hover:text-blue-700">Article</Link>
         </nav>
 
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder="Search News..."
-          className=" px-4 py-2 border text-black border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-        />
+        
       </div>
     </header>
   );
